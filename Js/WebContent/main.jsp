@@ -17,7 +17,7 @@
 	 			</tr>
 	 			<tr>
 	 				<td><label>PW</label></td>
-	 				<td><input type="password" id ="password" placeholder="비밀번호를 입력하세요."></td>
+	 				<td><input type="password" id ="userPw" placeholder="비밀번호를 입력하세요."></td>
 	 			</tr>
 	 		</table>
 	 	</div>
