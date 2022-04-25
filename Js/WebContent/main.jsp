@@ -13,5 +13,5 @@
 	 	  <input type="submit" value="로그인">
 	 	  <input type="reset" value="다시 입력">
 	 </form>
-</body>
+</body> 
 </html>
