@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
+<h2>LOGIN PAGE</h2>
+<script type="text/javascript" src="lib/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/Login.js"></script>
 </head>
 <body>
 	 	<div>
