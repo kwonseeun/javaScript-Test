@@ -6,7 +6,20 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<style type="text/css">
-		
+		 #menuTable {border-collapse: collapse; display: inline-block; width: 340px;}
+            #menuTable td{width: 170px;}
+            #menuTable td button{font-weight: bold; height: 30px; border: 1px solid blue;
+                                    width: 70px; background: #5AAFFF; color: white; cursor: pointer;}
+            #snakeTable {border-collapse: collapse; display: inline-block;}
+            #snakeTable td{border: 1px solid blue; width: 13px; height: 13px;}
+            .snake{background-color: #5AAFFF;}
+            .food{background-color: #CCCCCC;}
+            .center{text-align: center;}
+            #controller {border-collapse: collapse; display: inline-block; margin-top: 20px;}
+            #controller td{border: none; text-align: center; font-size: 20pt; color: white;}
+            .btn{width: 80px; height: 80px; background: #CCCCCC; border-radius: 50px;}
+            .alignLeft{text-align: left;}
+            .alignRight{text-align: right;}
 	</style>
 	  <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
 	 <script type="text/javascript">
@@ -97,11 +110,176 @@
 	 
 	 // move
 	 function move() {
-		 
-	 }
+		var head = new Array();
+		head[0] = snake[0][0];
+		head[1] = snake[0][1];
+		
+		// 벽을 만난건지 체크
+		var tmp = head[0]+1*TB;
+		if (tmp >= 0 && tmp < mapSize) {
+			head[0] = tmp;
+		}else {
+			alert('점수 :' + score);
+			end();
+			initAll();
+			return;
+		}
+		
+		tmp = head[1]+1*LR;
+		 if(tmp >= 0 && tmp < mapSize) {
+             head[1] = tmp;
+         }else {
+             alert('점수 : '+score);
+             end();
+             initAll();
+             return;
+         }
+	
+		// 몸통을 만난건지 체크
+         if($('#block'+head[0]+'_'+head[1]).hasClass('snake')){
+             alert('점수 : '+score);
+             end();
+             initAll();
+             return;                    
+         }
+
+
+         snake.unshift(head);
+
+         if(drawSnake() != 'eat') { //먹은게 아니면
+             snake.pop(); //꼬리 연장 X
+         }
+
+		}
+	 
+	 function left() {
+         if(TB == 0) return; // 반대방향으로 방향전환 불가
+         LR = -1;
+         TB = 0;
+     }
+     function right() {
+         if(TB == 0) return; // 반대방향으로 방향전환 불가
+         LR = 1;
+         TB = 0;
+     }
+     function up() {
+         if(LR == 0) return; // 반대방향으로 방향전환 불가
+         LR = 0;
+         TB = -1;
+     }
+     function down() {
+         if(LR == 0) return; // 반대방향으로 방향전환 불가
+         LR = 0;
+         TB = 1;
+     }
+     
+     $(document).on('click', '#startBtn' , function(){
+    	 end();
+    	 start();
+     });
+     
+     $(document).on('click', 'btn'. function(){
+    	 var key = $(this).attr('data-key');
+    	 if ( key == 'up') {
+			up();
+		}else if (key == 'down'){
+			down();
+		}else if( key == 'left'){
+			left();
+		}else if(key == 'right'){
+			right();
+		}
+     });
+     
+     $(document).on('mouseover', '.btn', function(){
+         $(this).css('background', '#5AAFFF');
+
+         var key = $(this).attr('data-key');
+         if(key == 'up') {
+             up();
+         }else if(key == 'down') {
+             down();
+         }else if(key == 'left') {
+             left();
+         }else if(key == 'right') {
+             right();
+         }
+     });
+
+     $(document).on('keydown', 'body', function(event){
+         if(event.key == 'ArrowUp') {
+             $('#up_btn').css('background', '#5AAFFF');
+             up();
+         }else if(event.key == 'ArrowDown') {
+             $('#down_btn').css('background', '#5AAFFF');
+             down();
+         }else if(event.key == 'ArrowLeft') {
+             $('#left_btn').css('background', '#5AAFFF');
+             left();
+         }else if(event.key == 'ArrowRight') {
+             $('#right_btn').css('background', '#5AAFFF');
+             right();
+         }
+     });
+
+     $(document).on('mouseout', '.btn', function(){
+         $(this).css('background', '#CCCCCC');
+     });
+
+     $(document).on('keyup', 'body', function(){
+         $('.btn').css('background', '#CCCCCC');
+     });
+
+     function initAll() {
+         score = 0; // 점수 초기화
+         initMap(); // 맵 초기화
+         initFood(); // 먹이 초기화
+         initSnake(); // init snake
+         LR = 0; // 좌우 방향 초기화
+         TB = 1; // 위아래 방향 초기화
+     }
+	
+     function start(){
+    	 gameInterval = setInterval(move, 70);
+     }
+     
+     function end(){
+    	 clearInterval(gameInterval);
+     }
+     
+     $(document).ready(function(){
+    	 initAll();
+     };
+
 	 </script>
 </head>
 <body>
-
+	<div class="center">
+		<h2>Snake Game</h2>
+		<table id="menuTable">
+			<tr>
+				<td class="alignLeft">
+					<button id="startBtn">시작</button>
+				</td>
+				<td class="alignRight">
+					<span>점수 : <span id='score'>0</span></span>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="center">
+		<table id="snakeTable">
+		</table>
+	</div>
+	<div class="center">
+		<table id="controller">
+		<tr>
+            <td></td><td id='up_btn' class='btn' data-key='up'>△</td><td></td>
+        </tr>
+        <tr>
+        	<td></td><td id='down_btn' class='btn' data-key='down'>▽</td><td></td>
+        </tr>
+		</table>
+	</div>
 </body>
 </html>
