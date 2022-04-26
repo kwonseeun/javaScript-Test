@@ -82,7 +82,7 @@
                  state = 'eat';
 			}
 		}
-		 return state;
+		 return state; 
 	 }
 	 
 	 //먹이 초기화
