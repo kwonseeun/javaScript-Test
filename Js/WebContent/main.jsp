@@ -348,7 +348,7 @@ footer{
 						class="image"></a>
 			</div>
 		</header>
-
+ 
 		<!--로그인 부분-->
 		<section class="login-wrap">
 
