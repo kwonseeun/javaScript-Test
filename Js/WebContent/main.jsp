@@ -350,7 +350,7 @@ footer{
 		</header>
  
 		<!--로그인 부분-->
-		<section class="login-wrap">
+		<section class="login-wrap"> 
 
 			<div class="login-id-wrap">
 				<input id="input-id" placeholder="아이디" type="text"></input>
