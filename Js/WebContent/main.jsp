@@ -457,7 +457,7 @@ footer{
 					<a href="https://nid.naver.com/user2/V2Join?m=agree&lang=ko_KR" target="_blank"
 						title="일회용번호 로그인">Sign up</a>
 				</span>
-			</div>
+			</div> 
 
 
 		</section>
