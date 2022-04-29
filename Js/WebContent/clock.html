@@ -9,7 +9,7 @@
 		<span id= "clock" style="color:gray; font-size:100px;"> clock</span>
 		<span id= "apm" style="color:gray; font-size:50px;"> ampm</span>		
 	</div>
-	
+	  
 	<script type="text/javascript">
 	  var Target = document.getElementById("clock");
       var Target_apm = document.getElementById("apm");
@@ -23,12 +23,13 @@
               var AmPm ="PM";
               hours %= 12;
           }
+          
 	
       Target.innerText =
     	  `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 
       Target_apm.innerText = `${AmPm}`;
-
+	
   }
   clock();
   setInterval(clock, 1000);
